@@ -1,0 +1,43 @@
+.home {
+    display: flex;
+}
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid lightgray;
+    margin: 0;
+    padding: 0;
+    width: 230px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar h3 {
+    padding: 10px;
+}
+
+.sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+    border-bottom: 2px solid lightgray;
+}
+
+.sidebar a.active {
+    background-color: #3b7fce;
+    color: white;
+}
+
+.sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+.content {
+    margin-left: 230px;
+    padding: 1px 16px;
+    height: 1000px;
+}
