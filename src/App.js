@@ -1,9 +1,15 @@
 import './App.css';
+import Login from './pages/login/index';
+import Register from './pages/register/index';
+
 
 function App() {
     return (
         <div className="App">
-            <h1>hello</h1>
+            <div>
+                {/* <Login /> */}
+                {/* <Register /> */}
+            </div>
         </div>
     );
 }

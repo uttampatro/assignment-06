@@ -6,7 +6,6 @@ import {
     Container,
     CssBaseline,
     Grid,
-    Link,
     TextField,
     Typography,
 } from '@mui/material';
@@ -17,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
-function Login() {
+function Register() {
     // const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -58,7 +57,7 @@ function Login() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign In
+                        Sign Up
                     </Typography>
                     <Box component="form" sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
@@ -101,15 +100,8 @@ function Login() {
                                 color: 'black',
                             }}
                         >
-                            Login
+                            Sign Up
                         </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="" variant="body2">
-                                    Don't have an account? Sign Up
-                                </Link>
-                            </Grid>
-                        </Grid>
                     </Box>
                 </Box>
             </Container>
@@ -117,4 +109,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;
