@@ -1,3 +1,7 @@
+.home {
+    position: fixed;
+    width: 100%;
+}
 .homebody {
     display: flex;
 }
@@ -16,6 +20,7 @@
 
 .sidebar h3 {
     padding: 10px;
+    border-bottom: 1px solid lightgray;
 }
 
 .sidebar a {

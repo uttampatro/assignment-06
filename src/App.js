@@ -18,7 +18,6 @@ function App() {
             <div className="App">
                 <div className="app_body">
                     <Routes>
-                        {/* <Route path="/" element={<Login />} /> */}
                         {!isAuth ? (
                             <>
                                 <Route
@@ -51,9 +50,6 @@ function App() {
                 </div>
             </div>
         </BrowserRouter>
-        // <div>
-        //     <Home />
-        // </div>
     );
 }
 

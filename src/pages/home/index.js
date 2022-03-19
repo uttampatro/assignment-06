@@ -12,10 +12,13 @@ import { makeStyles } from '@mui/styles';
 import Header from '../../components/header';
 import { deleteStudent, getAllStudent } from '../../services/studentService';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../../services/userService';
 
 const useStyles = makeStyles({
     homeBody: {
-        padding: '50px',
+        padding: '30px',
+        position: 'fixed',
+        width: '75%',
     },
     table: {
         width: '100%',
@@ -32,17 +35,6 @@ const useStyles = makeStyles({
             fontSize: 18,
         },
     },
-    visuallyHidden: {
-        // border: 0,
-        // clip: 'rect(0 0 0 0)',
-        // height: 1,
-        // margin: -1,
-        // overflow: 'hidden',
-        // padding: 0,
-        // position: 'absolute',
-        // top: 20,
-        // width: 1,
-    },
 });
 
 function Home({ auth }) {
@@ -53,7 +45,6 @@ function Home({ auth }) {
     const fetchStudentList = async () => {
         try {
             const data = await getAllStudent();
-            // console.log(data)
             setStudents(data);
         } catch (error) {
             console.log(error);
@@ -73,21 +64,36 @@ function Home({ auth }) {
         }
     };
 
+    const loggingOut = async () => {
+        try {
+            await logout();
+            auth();
+            navigate('/');
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         fetchStudentList();
     }, []);
 
+    if (auth) {
+        <>Loading....</>;
+    }
+
     return (
         <div className="home">
-            <Header auth={auth} />
+            <Header />
 
             <div className="homebody">
                 <div class="sidebar">
                     <h3>Students</h3>
-                    <a class="active" href="/home">
+                    <a className="active" href="/home">
                         - View Student
                     </a>
                     <a href="/addStudent">- Add Student</a>
+                    <a onClick={loggingOut}>- Logout</a>
                 </div>
                 <div class="content">
                     <div className={classes.homeBody}>
@@ -129,7 +135,9 @@ function Home({ auth }) {
                                                     {student.division}
                                                 </TableCell>
                                                 <TableCell>
-                                                    {student.status ? "Active" : 'Inactive'}
+                                                    {student.status
+                                                        ? 'Active'
+                                                        : 'Inactive'}
                                                 </TableCell>
                                                 <TableCell>
                                                     <Button
@@ -149,7 +157,9 @@ function Home({ auth }) {
                                                         color="secondary"
                                                         variant="contained"
                                                         onClick={() =>
-                                                            deletingStudent(student._id)
+                                                            deletingStudent(
+                                                                student._id
+                                                            )
                                                         }
                                                     >
                                                         Delete
