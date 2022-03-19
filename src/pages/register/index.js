@@ -11,30 +11,31 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-// import { login } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
+import { register } from '../../services/userService';
 
 const theme = createTheme();
 
-function Register() {
-    // const navigate = useNavigate();
+function Register({ auth }) {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // const handleSubmit = async e => {
-    //     e.preventDefault();
-    //     try {
-    //         const user = await login({ email, password });
-    //         if (!user) {
-    //             alert('Invalid Credential');
-    //         } else {
-    //             auth()
-    //             navigate('/home');
-    //         }
-    //     } catch (error) {
-    //         console.log('Invalid Credential');
-    //     }
-    // };
+    const handleSubmit = async e => {
+        e.preventDefault();
+        try {
+            const user = await register({ email, password });
+            // console.log(user);
+            if (!user) {
+                alert('Email Already Exist!');
+            } else {
+                auth();
+                navigate('/home');
+            }
+        } catch (error) {
+            console.log('Invalid Credential');
+        }
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -88,7 +89,7 @@ function Register() {
                             </Grid>
                         </Grid>
                         <Button
-                            // onClick={handleSubmit}
+                            onClick={handleSubmit}
                             type="submit"
                             fullWidth
                             variant="contained"

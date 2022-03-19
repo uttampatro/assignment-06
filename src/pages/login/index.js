@@ -12,30 +12,30 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-// import { login } from '../../services/authService';
+import { login } from '../../services/userService';
 import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
-function Login() {
-    // const navigate = useNavigate();
+function Login({ auth }) {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // const handleSubmit = async e => {
-    //     e.preventDefault();
-    //     try {
-    //         const user = await login({ email, password });
-    //         if (!user) {
-    //             alert('Invalid Credential');
-    //         } else {
-    //             auth()
-    //             navigate('/home');
-    //         }
-    //     } catch (error) {
-    //         console.log('Invalid Credential');
-    //     }
-    // };
+    const handleSubmit = async e => {
+        e.preventDefault();
+        try {
+            const user = await login({ email, password });
+            if (!user) {
+                alert('Invalid Credential');
+            } else {
+                auth();
+                navigate('/home');
+            }
+        } catch (error) {
+            console.log('Invalid Credential');
+        }
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -89,7 +89,7 @@ function Login() {
                             </Grid>
                         </Grid>
                         <Button
-                            // onClick={handleSubmit}
+                            onClick={handleSubmit}
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -105,7 +105,7 @@ function Login() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="" variant="body2">
+                                <Link href="/register" variant="body2">
                                     Don't have an account? Sign Up
                                 </Link>
                             </Grid>

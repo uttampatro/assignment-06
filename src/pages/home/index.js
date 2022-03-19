@@ -9,6 +9,7 @@ import {
     TableCell,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import Header from '../../components/header';
 
 const useStyles = makeStyles({
     homeBody: {
@@ -42,79 +43,82 @@ const useStyles = makeStyles({
     },
 });
 
-function Home() {
+function Home({ auth }) {
     const classes = useStyles();
 
     return (
         <div className="home">
-            <div class="sidebar">
-                <h3>Students</h3>
-                <a class="active" href="#home">
-                    - View Student
-                </a>
-                <a href="#addStudent">- Add Student</a>
-            </div>
-            <div class="content">
-                {/* <Header auth={auth} /> */}
-                <div className={classes.homeBody}>
-                    <form method="post">
-                        <Table className={classes.table}>
-                            <TableHead>
-                                <TableRow className={classes.thead}>
-                                    {/* <TableCell>ID</TableCell> */}
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Age</TableCell>
-                                    <TableCell>School</TableCell>
-                                    <TableCell>Class</TableCell>
-                                    <TableCell>Division</TableCell>
-                                    <TableCell>Status</TableCell>
-                                    <TableCell></TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {/* {users.map(user => { */}
-                                {/* return ( */}
-                                <TableRow
-                                    className={classes.row}
-                                    // key={user._id}
-                                >
-                                    {/* <TableCell>{user._id}</TableCell> */}
-                                    <TableCell>frfr</TableCell>
-                                    <TableCell>fwfw</TableCell>
-                                    <TableCell>uttam@email.com</TableCell>
-                                    <TableCell>erfre</TableCell>
-                                    <TableCell>erfre</TableCell>
-                                    <TableCell>erfre</TableCell>
-                                    <TableCell>
-                                        <Button
-                                            style={{
-                                                margin: '5px',
-                                            }}
-                                            // onClick={() =>
-                                            //     openUpdateUserDialog(user)
-                                            // }
-                                            // key={user._id}
-                                            color="primary"
-                                            variant="contained"
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            color="secondary"
-                                            variant="contained"
-                                            // onClick={() =>
-                                            //     // deletingUser(user._id)
-                                            // }
-                                        >
-                                            Delete
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                                {/* ); */}
-                                {/* })} */}
-                            </TableBody>
-                        </Table>
-                    </form>
+            <Header auth={auth} />
+
+            <div className="homebody">
+                <div class="sidebar">
+                    <h3>Students</h3>
+                    <a class="active" href="#home">
+                        - View Student
+                    </a>
+                    <a href="#addStudent">- Add Student</a>
+                </div>
+                <div class="content">
+                    <div className={classes.homeBody}>
+                        <form method="post">
+                            <Table className={classes.table}>
+                                <TableHead>
+                                    <TableRow className={classes.thead}>
+                                        {/* <TableCell>ID</TableCell> */}
+                                        <TableCell>Name</TableCell>
+                                        <TableCell>Age</TableCell>
+                                        <TableCell>School</TableCell>
+                                        <TableCell>Class</TableCell>
+                                        <TableCell>Division</TableCell>
+                                        <TableCell>Status</TableCell>
+                                        <TableCell></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {/* {users.map(user => { */}
+                                    {/* return ( */}
+                                    <TableRow
+                                        className={classes.row}
+                                        // key={user._id}
+                                    >
+                                        {/* <TableCell>{user._id}</TableCell> */}
+                                        <TableCell>frfr</TableCell>
+                                        <TableCell>fwfw</TableCell>
+                                        <TableCell>uttam@email.com</TableCell>
+                                        <TableCell>erfre</TableCell>
+                                        <TableCell>erfre</TableCell>
+                                        <TableCell>erfre</TableCell>
+                                        <TableCell>
+                                            <Button
+                                                style={{
+                                                    margin: '5px',
+                                                }}
+                                                // onClick={() =>
+                                                //     openUpdateUserDialog(user)
+                                                // }
+                                                // key={user._id}
+                                                color="primary"
+                                                variant="contained"
+                                            >
+                                                Edit
+                                            </Button>
+                                            <Button
+                                                color="secondary"
+                                                variant="contained"
+                                                // onClick={() =>
+                                                //     // deletingUser(user._id)
+                                                // }
+                                            >
+                                                Delete
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                    {/* ); */}
+                                    {/* })} */}
+                                </TableBody>
+                            </Table>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
