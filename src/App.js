@@ -4,6 +4,7 @@ import Login from './pages/login/index';
 import Register from './pages/register/index';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import AddStudent from './pages/addStudent';
 
 function App() {
     const [isAuth, setIsAuth] = useState(null);
@@ -41,6 +42,14 @@ function App() {
                                     path="/home"
                                     element={
                                         <Home auth={() => setIsAuth(false)} />
+                                    }
+                                />
+                                <Route
+                                    path="/addStudent"
+                                    element={
+                                        <AddStudent
+                                            auth={() => setIsAuth(false)}
+                                        />
                                     }
                                 />
                             </>

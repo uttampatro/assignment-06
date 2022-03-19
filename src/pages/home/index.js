@@ -12,7 +12,7 @@ import { makeStyles } from '@mui/styles';
 import Header from '../../components/header';
 import { deleteStudent, getAllStudent } from '../../services/studentService';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../services/userService';
+import Sidebar from '../../components/sidebar';
 
 const useStyles = makeStyles({
     homeBody: {
@@ -63,23 +63,9 @@ function Home({ auth }) {
         }
     };
 
-    const loggingOut = async () => {
-        try {
-            await logout();
-            auth();
-            navigate('/');
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     useEffect(() => {
         fetchStudentList();
     }, []);
-
-    if (auth) {
-        <>Loading....</>;
-    }
 
     return (
         <div className="home">
@@ -88,14 +74,7 @@ function Home({ auth }) {
             </div>
 
             <div className="homebody">
-                <div class="sidebar">
-                    <h3>Students</h3>
-                    <a className="active" href="/home">
-                        - View Student
-                    </a>
-                    <a href="/addStudent">- Add Student</a>
-                    <a onClick={loggingOut}>- Logout</a>
-                </div>
+                <Sidebar auth={auth} />
                 <div class="content">
                     <div className={classes.homeBody}>
                         <form method="post">
