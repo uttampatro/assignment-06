@@ -17,7 +17,6 @@ import { logout } from '../../services/userService';
 const useStyles = makeStyles({
     homeBody: {
         padding: '30px',
-        position: 'fixed',
         width: '75%',
     },
     table: {
@@ -55,7 +54,7 @@ function Home({ auth }) {
         try {
             const data = await deleteStudent(id);
             if (data) {
-                alert('Deleted user successfully');
+                alert('Deleted student successfully');
             }
             window.location = window.location;
             navigate('/home');
@@ -84,7 +83,9 @@ function Home({ auth }) {
 
     return (
         <div className="home">
-            <Header />
+            <div className="homeHeader">
+                <Header />
+            </div>
 
             <div className="homebody">
                 <div class="sidebar">
