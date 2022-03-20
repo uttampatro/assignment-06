@@ -28,8 +28,7 @@
     background-color: #3b7fce;
     color: white;
 }
-
 .sidebar a:hover:not(.active) {
-    background-color: #555;
+    background-color: gray;
     color: white;
 }

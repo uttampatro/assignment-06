@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { logout } from '../../services/userService';
 import './style.css';
 
@@ -15,14 +15,32 @@ function Sidebar({ auth }) {
             console.log(error);
         }
     };
+
+    // const homeClass = location.pathname === '/' ? 'active' : '';
+    // const aboutClass = location.pathname.match(/^\/about/) ? 'active' : '';
+
     return (
         <div class="sidebar">
             <h3>Students</h3>
-            <a className="active" href="/home">
+            <NavLink
+                className={({ isActive }) => (isActive ? 'active' : 'inactive')}
+                to="/home"
+            >
                 - View Student
-            </a>
-            <a href="/addStudent">- Add Student</a>
-            <a onClick={loggingOut}>- Logout</a>
+            </NavLink>
+            <NavLink
+                className={({ isActive }) => (isActive ? 'active' : 'inactive')}
+                to="/addStudent"
+            >
+                - Add Student
+            </NavLink>
+            <NavLink
+                className={({ isActive }) => (isActive ? 'active' : 'inactive')}
+                onClick={loggingOut}
+                to="/"
+            >
+                - Logout
+            </NavLink>
         </div>
     );
 }
