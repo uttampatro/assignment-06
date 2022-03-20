@@ -16,6 +16,7 @@
     margin-left: 230px;
     padding: 1px 16px;
     width: 100%;
+    position: fixed;
     height: 100%;
 }
 .home_footer {
