@@ -69,7 +69,6 @@ function Home({ auth }) {
                 page: currentPage + 1,
                 limit: studentPerPage,
             });
-            console.log(data);
             setStudents(data.studentList);
             setTotalCount(data.pagination.count);
         } catch (error) {
