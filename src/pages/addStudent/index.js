@@ -6,7 +6,7 @@ import { createStudent } from '../../services/studentService';
 
 function AddStudent({ auth }) {
     const [name, setName] = useState('');
-    const [age, setAge] = useState(Number);
+    const [age, setAge] = useState('');
     const [school, setSchool] = useState('');
     const [std, setStd] = useState(Number);
     const [division, setDivision] = useState('');
@@ -23,7 +23,7 @@ function AddStudent({ auth }) {
                 status,
             });
             if (student) {
-                alert('User added successfully');
+                alert('Student added successfully');
             }
         } catch (error) {
             console.log(error);
