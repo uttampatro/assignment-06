@@ -3,8 +3,10 @@ import './style.css';
 import Header from '../../components/header';
 import Sidebar from '../../components/sidebar';
 import { createStudent } from '../../services/studentService';
+import { useNavigate } from 'react-router-dom';
 
 function AddStudent({ auth }) {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [school, setSchool] = useState('');
@@ -12,7 +14,8 @@ function AddStudent({ auth }) {
     const [division, setDivision] = useState('');
     const [status, setStatus] = useState(Boolean);
 
-    const handleSubmit = async () => {
+    const handleSubmit = async e => {
+        e.preventDefault();
         try {
             const student = await createStudent({
                 name,
@@ -25,6 +28,8 @@ function AddStudent({ auth }) {
             if (student) {
                 alert('Student added successfully');
             }
+            window.location = window.location;
+            // navigate('/home');
         } catch (error) {
             console.log(error);
             alert('something went wrong');
