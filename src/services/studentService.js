@@ -42,4 +42,45 @@ const deleteStudent = async id => {
     }
 };
 
-export { createStudent, getAllStudent, deleteStudent };
+const updateStudent = async (
+    _id,
+    { name, age, school, std, division, status }
+) => {
+    try {
+        const response = await axios.put(
+            `${config.apiConfig.baseUrl}/v1/updateStudent/${_id}`,
+            {
+                name,
+                age,
+                school,
+                std,
+                division,
+                status,
+            }
+        );
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const fetchStudent = async studentId => {
+    try {
+        const response = await axios.get(
+            `${config.apiConfig.baseUrl}/v1/fetchStudent/${studentId}`
+        );
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export {
+    createStudent,
+    getAllStudent,
+    deleteStudent,
+    updateStudent,
+    fetchStudent,
+};

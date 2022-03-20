@@ -5,6 +5,7 @@ import Register from './pages/register/index';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import AddStudent from './pages/addStudent';
+import UpdateStudent from './pages/updateStudent';
 
 function App() {
     const [isAuth, setIsAuth] = useState(null);
@@ -48,6 +49,14 @@ function App() {
                                     path="/addStudent"
                                     element={
                                         <AddStudent
+                                            auth={() => setIsAuth(false)}
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/updateStudent/:_id"
+                                    element={
+                                        <UpdateStudent
                                             auth={() => setIsAuth(false)}
                                         />
                                     }

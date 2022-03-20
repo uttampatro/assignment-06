@@ -11,8 +11,9 @@ import {
 import { makeStyles } from '@mui/styles';
 import Header from '../../components/header';
 import { deleteStudent, getAllStudent } from '../../services/studentService';
-import { useNavigate } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/sidebar';
+import UpdateStudent from '../updateStudent';
 
 const useStyles = makeStyles({
     homeBody: {
@@ -40,6 +41,15 @@ function Home({ auth }) {
     const classes = useStyles();
     const navigate = useNavigate();
     const [students, setStudents] = useState([]);
+    const [currentRow, setCurrentRow] = useState({
+        _id: '',
+        name: '',
+        age: '',
+        school: '',
+        std: Number,
+        division: '',
+        status: Boolean,
+    });
 
     const fetchStudentList = async () => {
         try {
@@ -61,6 +71,11 @@ function Home({ auth }) {
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const openUpdateStudent = student => {
+        setCurrentRow(student);
+        navigate(`/updateStudent/${student._id}`);
     };
 
     useEffect(() => {
@@ -98,7 +113,7 @@ function Home({ auth }) {
                                                 className={classes.row}
                                                 key={student._id}
                                             >
-                                                {/* <TableCell>{user._id}</TableCell> */}
+                                                {/* <TableCell>{student._id}</TableCell> */}
                                                 <TableCell>
                                                     {student.name}
                                                 </TableCell>
@@ -124,10 +139,12 @@ function Home({ auth }) {
                                                         style={{
                                                             margin: '5px',
                                                         }}
-                                                        // onClick={() =>
-                                                        //     openUpdateUserDialog(user)
-                                                        // }
-                                                        // key={user._id}
+                                                        onClick={() =>
+                                                            openUpdateStudent(
+                                                                student
+                                                            )
+                                                        }
+                                                        key={student._id}
                                                         color="primary"
                                                         variant="contained"
                                                     >
