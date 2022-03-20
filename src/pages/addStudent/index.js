@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import Header from '../../components/header';
 import Sidebar from '../../components/sidebar';
+import { createStudent } from '../../services/studentService';
 
 function AddStudent({ auth }) {
+    const [name, setName] = useState('');
+    const [age, setAge] = useState(Number);
+    const [school, setSchool] = useState('');
+    const [std, setStd] = useState(Number);
+    const [division, setDivision] = useState('');
+    const [status, setStatus] = useState(Boolean);
+
+    const handleSubmit = async () => {
+        try {
+            const student = await createStudent({
+                name,
+                age,
+                school,
+                std,
+                division,
+                status,
+            });
+            if (student) {
+                alert('User added successfully');
+            }
+        } catch (error) {
+            console.log(error);
+            alert('something went wrong');
+        }
+    };
+
     return (
         <div className="addStudent">
             <div className="addStudentHeader">
@@ -17,19 +44,34 @@ function AddStudent({ auth }) {
                     <form className="form">
                         <div className="formFelid">
                             <label>Full Name</label>
-                            <input />
+                            <input
+                                required
+                                value={name}
+                                name="name"
+                                onChange={e => setName(e.target.value)}
+                            />
                         </div>
                         <div className="formFelid1">
                             <label>Age</label>
-                            <input />
+                            <input
+                                required
+                                value={age}
+                                name="age"
+                                onChange={e => setAge(e.target.value)}
+                            />
                         </div>
                         <div className="formFelid2">
                             <label>School</label>
-                            <input />
+                            <input
+                                required
+                                value={school}
+                                name="school"
+                                onChange={e => setSchool(e.target.value)}
+                            />
                         </div>
                         <div className="formFelid3">
                             <label>Class</label>
-                            <select onchange="">
+                            <select onChange={e => setStd(e.target.value)}>
                                 <option value="">Select</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -45,7 +87,7 @@ function AddStudent({ auth }) {
                         </div>
                         <div className="formFelid4">
                             <label>Division</label>
-                            <select onchange="">
+                            <select onChange={e => setDivision(e.target.value)}>
                                 <option value="">Select</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -57,16 +99,32 @@ function AddStudent({ auth }) {
                             <p>Status</p>
                             <div className="radio">
                                 <label>
-                                    <input type="radio" name="Choice" />
+                                    <input
+                                        value={true}
+                                        onChange={e =>
+                                            setStatus(e.target.value)
+                                        }
+                                        type="radio"
+                                        name="Choice"
+                                    />
                                     Active
                                 </label>
                                 <label>
-                                    <input type="radio" name="Choice" />
+                                    <input
+                                        value={false}
+                                        onChange={e =>
+                                            setStatus(e.target.value)
+                                        }
+                                        type="radio"
+                                        name="Choice"
+                                    />
                                     Inactive
                                 </label>
                             </div>
                         </div>
-                        <button className="button">Save</button>
+                        <button onClick={handleSubmit} className="button">
+                            Save
+                        </button>
                     </form>
                 </div>
             </div>
