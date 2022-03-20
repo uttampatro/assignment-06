@@ -16,8 +16,6 @@ function Sidebar({ auth }) {
         }
     };
 
-    // const homeClass = location.pathname === '/' ? 'active' : '';
-    // const aboutClass = location.pathname.match(/^\/about/) ? 'active' : '';
 
     return (
         <div class="sidebar">
