@@ -3,37 +3,21 @@ import './style.css';
 import Header from '../../components/header';
 import Sidebar from '../../components/sidebar';
 import { updateStudent } from '../../services/studentService';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function UpdateStudent({ auth }) {
-    const [id, setId] = useState('');
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [school, setSchool] = useState('');
     const [std, setStd] = useState(Number);
     const [division, setDivision] = useState('');
     const [status, setStatus] = useState(Boolean);
-    // const [currentRow, setCurrentRow] = useState({
-    //     _id: '',
-    //     name: '',
-    //     age: '',
-    //     school: '',
-    //     std: Number,
-    //     division: '',
-    //     status: Boolean,
-    // });
 
-    const { _id } = useParams;
+    const { _id } = useParams();
 
-
-    // const onUpdateInputChange = e => {
-    //     setCurrentRow(prev => {
-    //         return { ...prev, [e.target.name]: e.target.value };
-    //     });
-    // };
-
-    const updatingStudent = async e => {
-        e.preventDefault();
+    const updatingStudent = async (e) => {
+        e.preventDefault()
         try {
             const student = await updateStudent(_id, {
                 name,
@@ -43,19 +27,10 @@ function UpdateStudent({ auth }) {
                 division,
                 status,
             });
-            console.log(student);
             if (student) {
                 alert('Student Updated successfully');
             }
-            // setCurrentRow({
-            //     _id: '',
-            //     name: '',
-            //     age: '',
-            //     school: '',
-            //     std: Number,
-            //     division: '',
-            //     status: Boolean,
-            // });
+            navigate('/home');
         } catch (error) {
             console.log(error);
             alert('something went wrong');
