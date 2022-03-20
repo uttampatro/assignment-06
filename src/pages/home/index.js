@@ -7,13 +7,13 @@ import {
     Table,
     Button,
     TableCell,
+    TablePagination,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Header from '../../components/header';
 import { deleteStudent, getAllStudent } from '../../services/studentService';
-import { Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/sidebar';
-import UpdateStudent from '../updateStudent';
 
 const useStyles = makeStyles({
     homeBody: {
@@ -41,6 +41,9 @@ function Home({ auth }) {
     const classes = useStyles();
     const navigate = useNavigate();
     const [students, setStudents] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [studentPerPage, setStudentPerPage] = useState(7);
+    const [totalCount, setTotalCount] = useState(0);
     const [currentRow, setCurrentRow] = useState({
         _id: '',
         name: '',
@@ -51,10 +54,24 @@ function Home({ auth }) {
         status: Boolean,
     });
 
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);
+    };
+
+    const handleChangeRowsPerPage = event => {
+        setStudentPerPage(parseInt(event.target.value, 7));
+        setCurrentPage(0);
+    };
+
     const fetchStudentList = async () => {
         try {
-            const data = await getAllStudent();
-            setStudents(data);
+            const data = await getAllStudent({
+                page: currentPage + 1,
+                limit: studentPerPage,
+            });
+            console.log(data);
+            setStudents(data.studentList);
+            setTotalCount(data.pagination.count);
         } catch (error) {
             console.log(error);
         }
@@ -80,7 +97,7 @@ function Home({ auth }) {
 
     useEffect(() => {
         fetchStudentList();
-    }, []);
+    }, [currentPage, studentPerPage]);
 
     return (
         <div className="home">
@@ -168,6 +185,15 @@ function Home({ auth }) {
                                 </TableBody>
                             </Table>
                         </form>
+                    </div>
+                    <div className="home_footer">
+                        <TablePagination
+                            count={totalCount}
+                            page={currentPage}
+                            onPageChange={handleChangePage}
+                            rowsPerPage={studentPerPage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
                     </div>
                 </div>
             </div>

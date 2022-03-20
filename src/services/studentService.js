@@ -20,10 +20,10 @@ const createStudent = async ({ name, age, school, std, division, status }) => {
     }
 };
 
-const getAllStudent = async () => {
+const getAllStudent = async ({ page, limit }) => {
     try {
         const response = await axios.get(
-            `${config.apiConfig.baseUrl}/v1/fetchAllStudent`
+            `${config.apiConfig.baseUrl}/v1/fetchAllStudent?page=${page}&limit=${limit}`
         );
         return response.data;
     } catch (error) {
