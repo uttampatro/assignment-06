@@ -3,6 +3,7 @@ import {
     Avatar,
     Box,
     Button,
+    CircularProgress,
     Container,
     CssBaseline,
     Grid,
@@ -20,10 +21,13 @@ function Register({ auth }) {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async e => {
         e.preventDefault();
         try {
+            setLoading(true);
+
             const user = await register({ email, password });
             // console.log(user);
             if (!user) {
@@ -32,6 +36,7 @@ function Register({ auth }) {
                 auth();
                 navigate('/home');
             }
+            setLoading(false);
         } catch (error) {
             console.log('Invalid Credential');
         }
@@ -88,21 +93,43 @@ function Register({ auth }) {
                                 />
                             </Grid>
                         </Grid>
-                        <Button
-                            onClick={handleSubmit}
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            style={{
-                                marginTop: '30px',
-                                padding: '3px',
-                                marginBottom: '20px',
-                                backgroundColor: 'lightblue',
-                                color: 'black',
-                            }}
-                        >
-                            Sign Up
-                        </Button>
+                        {!loading ? (
+                            <>
+                                <Button
+                                    onClick={handleSubmit}
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    style={{
+                                        marginTop: '30px',
+                                        padding: '3px',
+                                        marginBottom: '20px',
+                                        backgroundColor: 'lightblue',
+                                        color: 'black',
+                                    }}
+                                >
+                                    Sign Up
+                                </Button>
+                            </>
+                        ) : (
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginTop: '30px',
+                                    height: '35px',
+                                    marginBottom: '20px',
+                                    borderRadius: '8px',
+                                }}
+                            >
+                                <CircularProgress
+                                    sx={{
+                                        color: 'black',
+                                    }}
+                                />
+                            </Box>
+                        )}
                     </Box>
                 </Box>
             </Container>

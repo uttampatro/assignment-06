@@ -3,6 +3,7 @@ import {
     Avatar,
     Box,
     Button,
+    CircularProgress,
     Container,
     CssBaseline,
     Grid,
@@ -20,11 +21,13 @@ const theme = createTheme();
 function Login({ auth }) {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
     const [password, setPassword] = useState('');
 
     const handleSubmit = async e => {
         e.preventDefault();
         try {
+            setLoading(true);
             const user = await login({ email, password });
             if (!user) {
                 alert('Invalid Credential');
@@ -32,6 +35,7 @@ function Login({ auth }) {
                 auth();
                 navigate('/home');
             }
+            setLoading(false);
         } catch (error) {
             console.log('Invalid Credential');
         }
@@ -88,21 +92,43 @@ function Login({ auth }) {
                                 />
                             </Grid>
                         </Grid>
-                        <Button
-                            onClick={handleSubmit}
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            style={{
-                                marginTop: '30px',
-                                padding: '3px',
-                                marginBottom: '20px',
-                                backgroundColor: 'lightblue',
-                                color: 'black',
-                            }}
-                        >
-                            Login
-                        </Button>
+                        {!loading ? (
+                            <>
+                                <Button
+                                    onClick={handleSubmit}
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    style={{
+                                        marginTop: '30px',
+                                        padding: '3px',
+                                        marginBottom: '20px',
+                                        backgroundColor: 'lightblue',
+                                        color: 'black',
+                                    }}
+                                >
+                                    Login
+                                </Button>
+                            </>
+                        ) : (
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginTop: '30px',
+                                    height: '35px',
+                                    marginBottom: '20px',
+                                    borderRadius: '8px',
+                                }}
+                            >
+                                <CircularProgress
+                                    sx={{
+                                        color: 'black',
+                                    }}
+                                />
+                            </Box>
+                        )}
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link href="/register" variant="body2">
