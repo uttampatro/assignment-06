@@ -118,7 +118,7 @@ function Login({ auth }) {
                                     justifyContent: 'center',
                                     marginTop: '30px',
                                     height: '35px',
-                                    marginBottom: '20px',
+                                    marginBottom: '15px',
                                     borderRadius: '8px',
                                 }}
                             >
