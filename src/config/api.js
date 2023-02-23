@@ -4,7 +4,7 @@ const localApiConfig = {
     baseUrl: 'http://localhost:5000',
 };
 const prodApiConfig = {
-    baseUrl: 'https://assignment-06-service.herokuapp.com',
+    baseUrl: 'https://student-management-system-service.vercel.app',
 };
 console.log(process.env.REACT_APP_ENVIRONMENT);
 
